@@ -22,7 +22,7 @@
                     mdi-pencil
                 </v-icon>
                 </div>
-                <div class="iconBox ml-2" style="background: red;">
+                <div class="iconBox ml-2" style="background: red;" @click="deleteUser()">
                   <v-icon
                     class="mt-1"
                     medium
@@ -44,6 +44,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- open snakbar to show message -->
+        <v-snackbar
+        v-model="snackbar"
+        :timeout="timeout"
+        :color="snackBarColor"
+        >
+        {{message}}
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+            color="blue"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+            >
+            Close
+            </v-btn>
+        </template>
+        </v-snackbar>
     </div>
 </template>
 
@@ -56,12 +76,25 @@ export default {
             default: null
         }
     },
+    data () {
+        return {
+            snackbar: false,
+            message: '',
+            timeout: 2000,
+            snackBarColor: ''
+        }
+    },
     computed: {
         routeName () {
             return this.$route.name
         }
     },
     methods: {
+        showSnackBar(color, msg) {
+          this.snackbar = true
+          this.message = msg
+          this.snackBarColor = color
+        },
         goToAddEdit() {
             this.$router.push('/addEdit')
         },
@@ -69,6 +102,14 @@ export default {
             if (this.personSelected) {
               this.$router.push({name: 'AddEdit', params: {editUserDetail: this.personSelected}})
             }
+        },
+        deleteUser () {
+          this.showSnackBar('red', `${this.personSelected.FirstName} is being deleted`) 
+          setTimeout(() => {
+            if(this.personSelected) {
+                this.$router.push({name: 'Home', params: {deleteUser: this.personSelected}})
+            }
+          }, 2050);
         }
     }
 }

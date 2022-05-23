@@ -65,6 +65,10 @@ export default {
   },
   mounted() {
     this.previousContacts = contacts
+
+    if (this.$route.params.deleteUser) {
+      this.previousContacts.splice(this.$route.params.deleteUser.index, 1)
+    }
   },
 }
 </script>
