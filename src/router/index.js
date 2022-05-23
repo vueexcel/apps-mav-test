@@ -13,7 +13,8 @@ const routes = [
   {
     path: '/detail',
     name: 'Detail',
-    component: () => import('../views/DetailPage.vue')
+    component: () => import('../views/DetailPage.vue'),
+    props: {userDetails: {}}
   },
   {
     path: '/addEdit',

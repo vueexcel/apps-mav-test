@@ -6,21 +6,21 @@
         color="White"
         size="112"
       >
-        <span class="avatarText">RJ</span>
+        <span class="avatarText">{{avatarName}}</span>
       </v-avatar>
     </div>
     <div class="my-4">
-      <div class="mb-2">  
-        <p><span class="spanClass">First Name</span><br />Rohan</p>
+      <div class="mb-2">
+        <p><span class="spanClass">First Name</span><br />{{personSelected.FirstName ? personSelected.FirstName : ''}}</p>
       </div>
       <div class="mb-2">  
-        <p><span class="spanClass">Last Name</span><br />Jaiswal</p>
+        <p><span class="spanClass">Last Name</span><br />{{personSelected.LastName ? personSelected.LastName : ''}}</p>
       </div>
       <div class="mb-2">  
-        <p><span class="spanClass">Phone Number</span><br />+91 2233445566</p>
+        <p><span class="spanClass">Phone Number</span><br />{{personSelected.Phone ? personSelected.Phone : ''}}</p>
       </div>
       <div>  
-        <p><span class="spanClass">Email Address</span><br />rohan@gmail.com</p>
+        <p><span class="spanClass">Email Address</span><br />{{personSelected.Email ? personSelected.Email : ''}}</p>
       </div>
     </div>
   </div>
@@ -28,6 +28,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      avatarName: '',
+      personSelected: {
+          FirstName: '',
+          LastName : '',
+          Phone : '',
+          Email : '',
+          index : null
+      }
+    }
+  },
+  mounted() {
+    this.personSelected = this.$route.params.userDetails
+    this.avatarName = this.personSelected.FirstName.charAt(0)+this.personSelected.LastName.charAt(0)
+  },
   methods: {
     goToHome() {
       this.$router.push('/')

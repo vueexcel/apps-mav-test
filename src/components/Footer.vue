@@ -1,7 +1,7 @@
 <template>
     <div class="FooterContainer">
         <div class="text-center">
-            <div v-if="routeName === 'Home'" class="iconContainer">
+            <div v-if="routeName === 'Home'" class="iconContainer" @click="goToAddEdit()">
                 <div class="iconBox" style="color: #6ed4f0">
                   <v-icon
                     class="mt-1"
@@ -53,6 +53,11 @@ export default {
     computed: {
         routeName () {
             return this.$route.name
+        }
+    },
+    methods: {
+        goToAddEdit() {
+            this.$router.push('/addEdit')
         }
     }
 }

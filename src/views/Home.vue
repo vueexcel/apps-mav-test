@@ -1,3 +1,4 @@
+
 <template>
   <div class="home">
     <p class="text--disabled mb-6">MY CONTACTS</p>
@@ -12,7 +13,7 @@
     </v-autocomplete>
     
     <div class="UserListMainBox">
-      <div class="d-flex userListContainer" v-for="(person, index) in contactList" :key="index">
+      <div class="d-flex userListContainer" v-for="(person, index) in contactList" :key="index" @click="showDetail(person, index)">
         <div>
           <img src="@/assets/dummy-profile.png" alt="image" height="50px" width="50px">
         </div>
@@ -34,9 +35,21 @@ export default {
       contactList: []
     }
   },
+  methods:{
+    showDetail(personDetail, index) {
+        const obj = {
+          FirstName: personDetail.FirstName,
+          LastName : personDetail.LastName,
+          Phone : personDetail.Phone,
+          Email : personDetail.Email,
+          index: index
+        }
+        this.$router.push({name: 'Detail', params: {userDetails: obj}})
+    }
+  },
   mounted() {
     this.contactList = contacts
-  }
+  },
 }
 </script>
 
