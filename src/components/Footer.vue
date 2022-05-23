@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div v-if="routeName === 'AddEdit'" class="iconContainer">
-                <div class="iconBox">
+                <div class="iconBox" @click="saveUser()">
                   <v-icon
                     class="mt-1"
                     medium
@@ -110,6 +110,16 @@ export default {
                 this.$router.push({name: 'Home', params: {deleteUser: this.personSelected}})
             }
           }, 2050);
+        },
+        saveUser () {
+          if(this.personSelected && this.personSelected.FirstName.trim() && this.personSelected.LastName.trim() && this.personSelected.Phone.trim()) {
+            this.showSnackBar('success', `${this.personSelected.FirstName} is being saved`) 
+            setTimeout(() => {
+              this.$router.push({name: 'Home', params: {saveUser: this.personSelected}})
+            }, 2050);
+          } else {
+              this.showSnackBar('red', `Cann't create new contact, try again.`)
+          }
         }
     }
 }

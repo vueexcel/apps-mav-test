@@ -9,7 +9,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    props: {deleteUser: {}}
+    props: {deleteUser: {}, saveUser: {}}
   },
   {
     path: '/detail',

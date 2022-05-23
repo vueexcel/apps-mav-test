@@ -69,6 +69,13 @@ export default {
     if (this.$route.params.deleteUser) {
       this.previousContacts.splice(this.$route.params.deleteUser.index, 1)
     }
+    if (this.$route.params.saveUser) {
+      if (this.$route.params.saveUser.index || this.$route.params.saveUser.index == 0) {
+        this.previousContacts[this.$route.params.saveUser.index] = this.$route.params.saveUser
+      } else {
+        this.previousContacts.push(this.$route.params.saveUser)
+      }
+    }
   },
 }
 </script>

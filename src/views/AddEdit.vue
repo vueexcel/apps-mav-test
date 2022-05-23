@@ -31,7 +31,7 @@
         </p>
       </div>
     </div>
-    <Footer />
+    <Footer :person-selected="formData"/>
   </div>
 </template>
 
@@ -43,7 +43,6 @@ export default {
   },
   data() {
     return {
-      avatarName: '',
       formData : {
         FirstName: '',
         LastName: '',
@@ -58,9 +57,15 @@ export default {
       this.$router.push('/')
     }
   },
+  computed :{
+    avatarName() {
+      return this.formData.FirstName.charAt(0)+this.formData.LastName.charAt(0)
+    }
+  },
   mounted() {
-    this.formData = this.$route.params.editUserDetail
-    this.avatarName = this.formData.FirstName.charAt(0)+this.formData.LastName.charAt(0)
+    if (this.$route.params.editUserDetail) {
+      this.formData = this.$route.params.editUserDetail
+    }
   },
 }
 </script>
