@@ -1,0 +1,111 @@
+
+<template>
+  <div class="home">
+    <p class="text--disabled mb-6">MY CONTACTS</p>
+    <v-autocomplete
+      clearable
+      :search-input.sync="searchText"
+      hide-no-data
+      append-icon="mdi-magnify"
+      label="Type name or number"
+      solo
+    >
+    </v-autocomplete>
+    
+    <div class="UserListMainBox">
+      <div class="d-flex userListContainer" v-for="(person, index) in contactList" :key="index" @click="showDetail(person, index)">
+        <div>
+          <img src="@/assets/dummy-profile.png" alt="image" height="50px" width="50px">
+        </div>
+        <div class="ml-4">
+          <p class="nameClass"><span class="nameColor">{{person.FirstName}} {{person.LastName}}</span> <br />{{person.Phone}}</p>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</template>
+
+<script>
+import Footer from '@/components/Footer.vue'
+import contacts from '@/assets/contact.json'
+export default {
+  name: 'Home',
+  components: {
+    Footer
+  },
+  data() {
+    return {
+      searchText : '',
+      previousContacts: []
+    }
+  },
+  computed: {
+    contactList() {
+      let resultArr = this.previousContacts
+      if (this.searchText) {
+        resultArr = this.previousContacts.filter((el) => {
+            return el.FirstName.toLowerCase().includes(this.searchText.toLowerCase()) || el.LastName.toLowerCase().includes(this.searchText.toLowerCase()) || el.Phone.includes(this.searchText)
+        })
+      }
+      return resultArr
+    }
+  },
+  methods:{
+    showDetail(personDetail, index) {
+        const obj = {
+          FirstName: personDetail.FirstName,
+          LastName : personDetail.LastName,
+          Phone : personDetail.Phone,
+          Email : personDetail.Email,
+          index: index
+        }
+        this.$router.push({name: 'Detail', params: {userDetails: obj}})
+    }
+  },
+  mounted() {
+    this.previousContacts = contacts
+
+    if (this.$route.params.deleteUser) {
+      this.previousContacts.splice(this.$route.params.deleteUser.index, 1)
+    }
+    if (this.$route.params.saveUser) {
+      if (this.$route.params.saveUser.index || this.$route.params.saveUser.index == 0) {
+        this.previousContacts[this.$route.params.saveUser.index] = this.$route.params.saveUser
+      } else {
+        this.previousContacts.push(this.$route.params.saveUser)
+      }
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.UserListMainBox{
+  height: 500px;
+  padding: 2px 2px;
+  padding-bottom: 60px;
+  overflow: scroll;
+}
+  .userListContainer {
+    height: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 8px 2px #edeff0;
+    -moz-box-shadow: 0 0 8px 2px #edeff0;
+    box-shadow: 0 0 8px 2px #edeff0;
+
+    .nameClass{
+      margin-top: 5px;
+      font-size: 13px;
+
+      .nameColor{
+        color: #6ed4f0;
+      }
+    }
+  }
+  ::v-deep {
+    .v-autocomplete.v-select--is-menu-active .v-input__icon--append .v-icon {
+      transform: none !important;
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+[
+    {
+        "FirstName": "Rohan",
+        "LastName" : "Jaiswal",
+        "Phone" : "+91 2233445566",
+        "Email" : "rohan@gmail.com"
+    },
+    {
+        "FirstName": "Rohit",
+        "LastName" : "Jaiswal",
+        "Phone" : "+91 1133445566",
+        "Email" : "rohit@gmail.com"
+    },
+    {
+        "FirstName": "Soniya",
+        "LastName" : "Jaiswal",
+        "Phone" : "+91 2233745566",
+        "Email" : "soniya@gmail.com"
+    },
+    {
+        "FirstName": "Aakash",
+        "LastName" : "Sharma",
+        "Phone" : "+91 8233445566",
+        "Email" : "aakash@gmail.com"
+    },
+    {
+        "FirstName": "Karan",
+        "LastName" : "Singh",
+        "Phone" : "+91 2233445566",
+        "Email" : "karan@gmail.com"
+    },
+    {
+        "FirstName": "Riya",
+        "LastName" : "Malhotra",
+        "Phone" : "+91 2233445566",
+        "Email" : "riya@gmail.com"
+    },
+    {
+        "FirstName": "Abhay",
+        "LastName" : "Mehta",
+        "Phone" : "+91 9933445566",
+        "Email" : "abhay@gmail.com"
+    },
+    {
+        "FirstName": "Abhishek",
+        "LastName" : "Verma",
+        "Phone" : "+91 9833445566",
+        "Email" : "abhishek@gmail.com"
+    },
+    {
+        "FirstName": "Suresh",
+        "LastName" : "Tyagi",
+        "Phone" : "+91 7833445566",
+        "Email" : "suresh@gmail.com"
+    }
+]
