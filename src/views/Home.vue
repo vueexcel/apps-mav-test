@@ -3,8 +3,8 @@
   <div class="home">
     <p class="text--disabled mb-6">MY CONTACTS</p>
     <v-autocomplete
-      v-model="searchText"
       clearable
+      :search-input.sync="searchText"
       hide-no-data
       append-icon="mdi-magnify"
       label="Type name or number"
@@ -22,17 +22,33 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue'
 import contacts from '@/assets/contact.json'
 export default {
   name: 'Home',
+  components: {
+    Footer
+  },
   data() {
     return {
       searchText : '',
-      contactList: []
+      previousContacts: []
+    }
+  },
+  computed: {
+    contactList() {
+      let resultArr = this.previousContacts
+      if (this.searchText) {
+        resultArr = this.previousContacts.filter((el) => {
+            return el.FirstName.toLowerCase().includes(this.searchText.toLowerCase()) || el.LastName.toLowerCase().includes(this.searchText.toLowerCase()) || el.Phone.includes(this.searchText)
+        })
+      }
+      return resultArr
     }
   },
   methods:{
@@ -48,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    this.contactList = contacts
+    this.previousContacts = contacts
   },
 }
 </script>

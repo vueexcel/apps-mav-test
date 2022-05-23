@@ -23,11 +23,16 @@
         <p><span class="spanClass">Email Address</span><br />{{personSelected.Email ? personSelected.Email : ''}}</p>
       </div>
     </div>
+    <Footer :person-selected="personSelected" />
   </div>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue'
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       avatarName: '',

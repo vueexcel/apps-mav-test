@@ -19,7 +19,8 @@ const routes = [
   {
     path: '/addEdit',
     name: 'AddEdit',
-    component: () => import('../views/AddEdit.vue')
+    component: () => import('../views/AddEdit.vue'),
+    props: {editUserDetail: {}}
   }
 ]
 

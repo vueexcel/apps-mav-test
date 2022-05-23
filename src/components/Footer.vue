@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div v-if="routeName === 'Detail'" class="iconContainer">
-                <div class="iconBox" style="color: #6ed4f0">
+                <div class="iconBox" style="color: #6ed4f0" @click="editUser()">
                   <v-icon
                     class="mt-1"
                     medium
@@ -50,6 +50,12 @@
 <script>
 
 export default {
+    props: {
+        personSelected: {
+            Type: Object,
+            default: null
+        }
+    },
     computed: {
         routeName () {
             return this.$route.name
@@ -58,6 +64,11 @@ export default {
     methods: {
         goToAddEdit() {
             this.$router.push('/addEdit')
+        },
+        editUser() {
+            if (this.personSelected) {
+              this.$router.push({name: 'AddEdit', params: {editUserDetail: this.personSelected}})
+            }
         }
     }
 }

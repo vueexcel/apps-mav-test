@@ -6,41 +6,62 @@
         color="White"
         size="112"
       >
-        <span class="avatarText">RJ</span>
+        <span class="avatarText">{{avatarName}}</span>
       </v-avatar>
     </div>
     <div class="my-4">
       <div class="mb-2">  
         <p><span class="spanClass">First Name</span><br />
-          <v-text-field dense></v-text-field>
+          <v-text-field v-model="formData.FirstName" dense></v-text-field>
         </p>
       </div>
       <div class="mb-2">  
         <p><span class="spanClass">Last Name</span><br />
-          <v-text-field dense></v-text-field>
+          <v-text-field v-model="formData.LastName" dense></v-text-field>
         </p>
       </div>
       <div class="mb-2">  
         <p><span class="spanClass">Phone Number</span><br />
-          <v-text-field dense></v-text-field>
+          <v-text-field v-model="formData.Phone" dense></v-text-field>
         </p>
       </div>
       <div>  
         <p><span class="spanClass">Email Address</span><br />
-          <v-text-field dense></v-text-field>
+          <v-text-field v-model="formData.Email" dense></v-text-field>
         </p>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue'
 export default {
+  components: {
+    Footer
+  },
+  data() {
+    return {
+      avatarName: '',
+      formData : {
+        FirstName: '',
+        LastName: '',
+        Phone: '',
+        Email: '',
+        index: null
+      }
+    }
+  },
   methods: {
     goToHome() {
       this.$router.push('/')
     }
-  }
+  },
+  mounted() {
+    this.formData = this.$route.params.editUserDetail
+    this.avatarName = this.formData.FirstName.charAt(0)+this.formData.LastName.charAt(0)
+  },
 }
 </script>
 
